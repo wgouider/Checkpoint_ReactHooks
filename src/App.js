@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import MovieList from './components/MovieList';
+import AddMovie from './components/AddMovie';
+import { moviesData } from './Data';
+import React, { useState}  from 'react';
+import Filter from './components/Filter';  
+const App= () => {
+  const [movies, setMovies] = useState(moviesData); 
+  const [filter, setFilter] = useState({ title: '', rate: '' });  
 
-function App() {
+
+  const handleFilterChange = (type, value) => {
+    setFilter({ ...filter, [type]: value });
+  };
+
+  const add = (newMovie) => {
+    setMovies([...movies,newMovie])
+  }
+
+  const filteredMovies = movies.filter((movie) => {
+    const { title, rate } = filter;
+    return (
+      movie.title.toLowerCase().includes(title.toLowerCase()) && (!rate || movie.rate >= parseFloat(rate))
+    );
+  });
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style ={{backgroundColor : 'black'}} className="App">
+      
+      <div style={{gap:'64rem'}} className= "Entete">
+      <h1 style ={{color : 'white', marginLeft:'100px'}}> App Movies</h1>
+      <Filter style ={{display : 'flex', justifyContent:'flex-end' }} className='filter' onFilterChange={handleFilterChange} />
+      </div>
+      <MovieList movies={filteredMovies} />
+
+      
+      < AddMovie add={add} />
     </div>
   );
 }
