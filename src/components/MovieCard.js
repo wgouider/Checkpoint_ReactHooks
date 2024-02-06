@@ -1,58 +1,78 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import './MovieCard.css'
+import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
+// import "./MovieCard.css";
+import { Button, Modal } from "react-bootstrap";
 
+const MovieCard = ({ movie }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => setShowModal(true);
 
-const movieCard = ({movie}) => {
   return (
-    <CardGroup class = "Card">
-        
-        <Card style={{   width: '20rem', height : '50rem',margin: '5px' }}>
-           <Card.Img style={{width : '20rem', height: '30rem' }} variant="top" src={movie.posterUrl} alt={movie.name} />
-            <Card.Body >
-                <Card.Title style={{textAlign: 'center', fontSize : '20px', fontWeight: 'bold', margin:'20px' }}>{movie.title}</Card.Title>
-                <Card.Text style={{textAlign:'left',width:'18rem',height:'10rem'}}>
-                <p >Description: {movie.description}</p> 
-                </Card.Text>
-                  
-                  <Card.Text>  
-                  {/* <p>Trailer: {movie.trailer}</p>   */}
-                  <p>Rate: {movie.rate}</p> 
-                </Card.Text>
-            </Card.Body>
-          </Card>
-        
-      
-    
-      </CardGroup>
-);
+    <CardGroup class="Card">
+      <Card style={{ width: "20rem", height: "50rem", margin: "20px" }}>
+        <Card.Img
+          style={{ width: "20rem", height: "30rem" }}
+          variant="top"
+          src={movie.posterUrl}
+          alt={movie.name}
+        />
+        <Card.Body>
+          <Card.Title
+            style={{
+              textAlign: "center",
+              fontSize: "20px",
+              fontWeight: "bold",
+              margin: "5px",
+            }}
+          >
+            {movie.title}
+          </Card.Title>
+          <Card.Text
+            style={{ textAlign: "left", width: "18rem", height: "10rem" }}
+          >
+            <p>Description: {movie.description}</p>
+          </Card.Text>
+
+          <Card.Text>
+            {/* <p>Trailer: {movie.trailer}</p> */}
+            <p>Rate: {movie.rate}</p>
+          </Card.Text>
+
+          <Button variant="danger" onClick={handleModalShow}>
+            Trailer
+          </Button>
+        </Card.Body>
+      </Card>
+      <Modal
+        className="modal-dialog modal-lg"
+        show={showModal}
+        onHide={handleModalClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{movie.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{movie.description}</p>
+          <iframe
+            width="750"
+            height="500"
+            src={movie.trailer}
+            title="My App video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleModalClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </CardGroup>
+  );
 };
 
-
-
-// function movieCard(props) {
-//     return (
-//       <CardGroup class = "Card">
-          
-//           <Card style={{   width: '18rem', height : '28rem',margin: '10px' }}>
-//             {/* <Card.Img variant="top" src={props.image} alt={props.name} /> */}
-//               <Card.Body>
-//                   <Card.Title>{props.title}</Card.Title>
-//                   <Card.Text>
-//                     <p >Description:</p> {props.description}<br />
-//                     <p>Rate:</p> {props.rate} <br />
-//                     <p>PosterUrl</p>:{props.posterUrl} <br />
-//                     <p>Trailer:</p> {props.trailer} <br />
-//                   </Card.Text>
-//               </Card.Body>
-//             </Card>
-          
-        
-      
-//         </CardGroup>
-// );
-// };
- 
-
-export default movieCard;
+export default MovieCard;

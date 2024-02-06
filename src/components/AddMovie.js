@@ -46,7 +46,8 @@ const AddMovie = ({add})=> {
     return (
 
     <form onSubmit={handleSubmit}>
-      <Button  style={{marginRight:'5px', padding:"5px",  }} variant="primary" onClick={handleShow}> Add New Movie </Button>
+      <Button variant="secondary" size="lg"  onClick={handleShow}> Add New Movie </Button>
+      {/* <Button  style={{marginRight:'5px', padding:"5px",  }} variant="primary" onClick={handleShow}> Add New Movie </Button> */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Movie</Modal.Title>

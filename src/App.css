@@ -1,33 +1,29 @@
-  
-
-.Entete{
+.Entete {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-
-  
+  justify-content: center;
+  margin: 0px 25px 0px;
 }
 .filter {
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  }
-  
-  .filter input {
-    padding: 5px;
-    margin-right: 5px;
-  }
-  
-.App {
- 
-display: flex;
-flex-wrap: wrap;
-flex-basis:33%;
-flex-direction: row;
-padding: 20px;
-margin-right: 20px; 
+}
 
+.filter input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.App {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 33%;
+  flex-direction: row;
+  padding: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .App-logo {
@@ -63,4 +59,29 @@ margin-right: 20px;
   to {
     transform: rotate(360deg);
   }
+}
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.image-container:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom: 0;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
 }
